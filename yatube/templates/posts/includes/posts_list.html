@@ -1,0 +1,7 @@
+  
+  {% for post in page_obj %}
+    {% include 'includes/post_article.html' with flag_for_link=True name=True %}
+  {% endfor %} 
+
+  {% include 'posts/includes/paginator.html' %}
+  
