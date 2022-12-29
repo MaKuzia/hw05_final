@@ -17,7 +17,3 @@ def permission_denied(request, exception):
 
 def server_error(request):
     return render(request, 'core/500.html', status=500)
-
-
-def get_post(post_id):
-    return (get_object_or_404(Post, pk=post_id))
