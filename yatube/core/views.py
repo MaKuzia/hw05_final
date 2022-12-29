@@ -1,6 +1,4 @@
-from django.shortcuts import get_object_or_404, render
-
-from posts.models import Post
+from django.shortcuts import render
 
 
 def page_not_found(request, exception):

@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
 
-from posts.utils import paginate_posts
 from posts.forms import CommentForm, PostForm
 from posts.models import Follow, Group, Post
+from posts.utils import paginate_posts
 
 User = get_user_model()
 
@@ -34,8 +34,9 @@ def profile(request, username):
     template = 'posts/profile.html'
     author = get_object_or_404(User, username=username)
     user_posts = author.posts.all()
-    following = request.user.is_authenticated and Follow.objects.filter(user=request.user,
-                                                                        author=author).exists()
+    following = (request.user.is_authenticated
+                 and Follow.objects.filter(user=request.user,
+                                           author=author).exists())
     context = {
         'author': author,
         'page_obj': paginate_posts(request, user_posts),
@@ -105,7 +106,7 @@ def add_comment(request, post_id):
 @login_required
 def follow_index(request):
     template = 'posts/follow.html'
-    posts = Post.objects.filter(author__following__user = request.user)
+    posts = Post.objects.filter(author__following__user=request.user)
     context = {
         'page_obj': paginate_posts(request, posts),
     }
