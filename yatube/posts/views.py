@@ -41,7 +41,6 @@ def profile(request, username):
         'author': author,
         'page_obj': paginate_posts(request, user_posts),
         'following': following,
-        'request_user': request.user
     }
     return render(request, template, context)
 
